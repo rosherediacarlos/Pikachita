@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✦ Semilla Estelar ✦</title>
+<meta name="description" content="Una pequeña zona secreta para una semilla estelar.">
+<style>
+  :root{
+    --bg:#080916;
+    --panel:rgba(18,20,43,.78);
+    --panel2:rgba(30,28,62,.72);
+    --text:#fff8ff;
+    --muted:#c9c3dd;
+    --pink:#ff9ed8;
+    --violet:#bba6ff;
+    --gold:#ffe59a;
+    --cyan:#9feaff;
+    --green:#b9f5c5;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    min-height:100vh;
+    color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(255,158,216,.16), transparent 25%),
+      radial-gradient(circle at 80% 20%, rgba(187,166,255,.18), transparent 25%),
+      radial-gradient(circle at 50% 90%, rgba(159,234,255,.10), transparent 30%),
+      var(--bg);
+    overflow-x:hidden;
+  }
+  body:before{
+    content:"";
+    position:fixed; inset:0; pointer-events:none; opacity:.65;
+    background-image:
+      radial-gradient(circle, #fff 1px, transparent 1.5px),
+      radial-gradient(circle, rgba(255,229,154,.8) 1px, transparent 1.5px);
+    background-size:97px 97px, 157px 157px;
+    background-position:15px 30px, 70px 90px;
+  }
+  .wrap{width:min(1080px,92%);margin:auto;position:relative}
+  .screen{min-height:100vh;display:grid;place-items:center;padding:30px 0}
+  .card{
+    background:linear-gradient(145deg,rgba(30,29,64,.86),rgba(12,14,32,.82));
+    border:1px solid rgba(255,255,255,.13);
+    box-shadow:0 25px 80px rgba(0,0,0,.45),0 0 60px rgba(187,166,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:28px;
+  }
+  .login{width:min(600px,100%);padding:42px;text-align:center}
+  .star{font-size:4rem;animation:float 3s ease-in-out infinite}
+  @keyframes float{50%{transform:translateY(-9px) rotate(5deg)}}
+  h1{font-size:clamp(2.2rem,7vw,4.7rem);margin:8px 0;background:linear-gradient(90deg,var(--pink),var(--gold),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+  h2{margin-top:0;font-size:1.7rem}
+  .subtitle{color:var(--muted);font-size:1.05rem;line-height:1.7}
+  input{
+    width:100%;padding:15px 18px;border-radius:15px;border:1px solid rgba(255,255,255,.18);
+    background:rgba(0,0,0,.25);color:white;font-size:1rem;outline:none;
+  }
+  input:focus{border-color:var(--pink);box-shadow:0 0 0 4px rgba(255,158,216,.08)}
+  button{
+    border:0;border-radius:15px;padding:13px 18px;color:#1b1422;font-weight:800;cursor:pointer;
+    background:linear-gradient(135deg,var(--pink),var(--gold));
+    transition:.2s transform,.2s box-shadow;
+  }
+  button:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,158,216,.18)}
+  .login button{width:100%;margin-top:12px}
+  .hint{font-size:.8rem;color:#88839c;margin-top:13px}
+  .error{height:22px;color:#ff9eae;margin-top:10px;font-size:.9rem}
+  .hidden{display:none!important}
+
+  header{padding:70px 0 30px;text-align:center}
+  .eyebrow{letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-size:.78rem}
+  .hero-text{max-width:720px;margin:0 auto;color:var(--muted);font-size:1.1rem;line-height:1.8}
+  nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:28px 0}
+  nav a{
+    color:var(--text);text-decoration:none;padding:9px 13px;border-radius:999px;
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);font-size:.9rem;
+  }
+  nav a:hover{background:rgba(255,158,216,.13)}
+
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;margin:25px 0 50px}
+  .stat{padding:20px;text-align:center;min-height:145px;display:flex;flex-direction:column;justify-content:center}
+  .stat .icon{font-size:1.7rem}.stat strong{font-size:1.2rem;margin:7px 0}.stat span{font-size:.78rem;color:var(--muted)}
+  .pink{color:var(--pink)}.gold{color:var(--gold)}.violet{color:var(--violet)}.cyan{color:var(--cyan)}.green{color:var(--green)}
+
+  section{padding:30px 0 55px}
+  .section-title{text-align:center;margin-bottom:20px}
+  .section-title p{color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .feature{padding:25px;min-height:210px;position:relative;overflow:hidden}
+  .feature:after{content:"✦";position:absolute;right:20px;bottom:10px;font-size:4rem;color:rgba(255,255,255,.04)}
+  .feature h3{margin:0 0 10px}.feature p{color:var(--muted);line-height:1.7}
+  .quote{font-size:1.08rem;color:#fff;line-height:1.8}
+  .mini{font-size:.83rem;color:var(--muted)}
+
+  .timeline{display:grid;gap:12px}
+  .memory{padding:18px 20px;display:flex;gap:14px;align-items:flex-start}
+  .memory b{display:block;margin-bottom:4px}.memory p{margin:0;color:var(--muted);line-height:1.55}
+
+  .secret{
+    text-align:center;padding:42px 25px;
+    background:linear-gradient(145deg,rgba(255,158,216,.09),rgba(187,166,255,.09));
+  }
+  .secret .big{font-size:3rem}
+  .egg{margin-top:15px;color:var(--gold);font-weight:700}
+
+  footer{text-align:center;padding:45px 0 70px;color:#9c97ae}
+  .heart{color:var(--pink)}
+  .tiny-star{cursor:pointer;user-select:none;display:inline-block}
+  .toast{
+    position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);opacity:0;pointer-events:none;
+    background:#17162d;color:white;padding:13px 18px;border:1px solid rgba(255,255,255,.15);
+    border-radius:999px;transition:.3s;z-index:20;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:grid;place-items:center;padding:20px;z-index:10}
+  .modal .card{max-width:580px;padding:32px;text-align:center}
+  @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:650px){.grid{grid-template-columns:1fr}.login{padding:28px}.stats{grid-template-columns:1fr 1fr}.stat{min-height:125px}}
+</style>
+</head>
+<body>
+
+<div id="loginScreen" class="screen">
+  <div class="wrap">
+    <div class="card login">
+      <div class="star">🌱✨</div>
+      <div class="eyebrow">zona secreta · acceso restringido</div>
+      <h1>Semilla Estelar</h1>
+      <p class="subtitle">
+        Has encontrado una zona secreta.<br>
+        <strong>Identificación de Pikachita requerida.</strong>
+      </p>
+      <input id="password" type="password" placeholder="Introduce la clave secreta..." autocomplete="off">
+      <button onclick="enterSite()">⚡ Entrar al universo secreto</button>
+      <div id="error" class="error"></div>
+      <div class="hint">Pista: Mi mote preferido para la "diosita". ❤️</div>
+    </div>
+  </div>
+</div>
+
+<main id="site" class="hidden">
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">✦ archivo secreto de la Diosita Pokémon ✦</div>
+      <h1>Semilla Estelar 🌱 <span id="secretStar">✨</span></h1>
+      <p class="hero-text">
+        Bienvenida a un pequeño rincón del universo que existe porque eres tú.
+        Aquí se han guardado algunas pruebas de tus poderes, recuerdos, tonterías
+        y otras cosas que probablemente harán que tu Chachi C vuelva a exagerar.
+      </p>
+      <nav>
+        <a href="#magia">✨ Tu magia</a>
+        <a href="#pokemon">⚡ Pokémon</a>
+        <a href="#bingo">🎱 El bingo</a>
+        <a href="#recuerdos">💭 Recuerdos</a>
+        <a href="#cosas">❤️ Cosas que nunca te digo</a>
+        <a href="#secreto">🌌 Mensaje secreto</a>
+      </nav>
+    </header>
+
+    <div class="stats">
+      <div class="card stat"><div class="icon pink">🌱</div><strong>∞</strong><span>Nivel de poder de la Diosita</span></div>
+      <div class="card stat"><div class="icon gold">⚡</div><strong>100/100</strong><span>Nivel Pikachita</span></div>
+      <div class="card stat"><div class="icon violet">🧝‍♀️</div><strong>9999</strong><span>Nivel Elfa Kawaii</span></div>
+      <div class="card stat"><div class="icon cyan">🍫</div><strong>ILEGAL</strong><span>Nivel de dulzura</span></div>
+      <div class="card stat"><div class="icon green">❤️</div><strong>ERROR</strong><span>Importancia para mí: valor demasiado grande</span></div>
+    </div>
+
+    <section id="magia">
+      <div class="section-title">
+        <h2>✨ Tu magia</h2>
+        <p>Se han realizado pruebas científicas. Los resultados son preocupantes.</p>
+      </div>
+      <div class="grid">
+        <article class="card feature">
+          <h3>🪄 Poderes detectados</h3>
+          <p>
+            Capacidad para cantar, dibujar, crear cosas bonitas, hacer dulces,
+            alegrar conversaciones y conseguir que alguien a distancia se preocupe
+            por ti cuando no estás bien.
+          </p>
+        </article>
+        <article class="card feature">
+          <h3>🌲 Clasificación oficial</h3>
+          <p>
+            <strong>Elfa de los bosques kawaii — clase Semilla Estelar.</strong><br>
+            Tipo: Hada.<br>
+            Sin debilidad conocida
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="pokemon">
+      <div class="section-title">
+        <h2>⚡ Nuestro universo Pokémon</h2>
+        <p>Nuestra pequeña colección Pokémon.</p>
+      </div>
+      <div class="grid">
+        <article class="card feature">
+          <h3>🧸 Los Pikachu</h3>
+          <p>
+            Dos peluches, dos personas y un recuerdo de aquella vez que la distancia
+            dejó de ser distancia durante un ratito.
+          </p>
+        </article>
+        <article class="card feature">
+          <h3>🎨 El dibujo</h3>
+          <p>
+            Una canción, un dibujo de Pokémon y otros detalles que recuerdan que
+            tú también has creado cosas especiales para mí.
+          </p>
+        </article>
+        <article class="card feature">
+          <h3>👻 Gengar · 🎀 Sylveon · 🌿 Sprigatito · 🌊 Primarina</h3>
+          <p>
+            Invitados oficiales del universo de la Diosita. La dirección se reserva
+            el derecho de añadir más Pokémon sin previo aviso.
+          </p>
+        </article>
+        <article class="card feature">
+          <h3>🌟 Semilla estelar</h3>
+          <p class="quote">
+            Porque hay personas que simplemente hacen que alrededor suyo aparezcan
+            cosas bonitas.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="bingo">
+      <div class="section-title">
+        <h2>🎱 El gran proyecto del bingo</h2>
+        <p>Una empresa destinada al éxito. Llena de elementos kawaii.</p>
+      </div>
+      <div class="card feature">
+        <h3>📊 Previsión económica oficial</h3>
+        <p>
+          Probabilidad de que nos riamos muchísimo intentándolo: <strong>100%</strong>.<br>
+          Probabilidad de que terminemos inventando nuestro propio bingo: <strong>peligrosamente alta</strong>.
+        </p>
+      </div>
+    </section>
+
+    <section id="recuerdos">
+      <div class="section-title">
+        <h2>💭 Pequeña colección de recuerdos</h2>
+        <p>Algunas cosas que parecen pequeñas hasta que las juntas todas.</p>
+      </div>
+      <div class="timeline">
+        <div class="card memory"><div>🎬</div><div><b>Series, películas y programas</b><p>Horas compartiendo cosas aunque hubiera kilómetros de por medio.</p></div></div>
+        <div class="card memory"><div>🎵</div><div><b>Música</b><p>Canciones compartidas que acabaron formando parte de nuestra historia.</p></div></div>
+        <div class="card memory"><div>🧸</div><div><b>Los peluches de Pikachu</b><p>Un pequeño intercambio que terminó convirtiéndose en otro recuerdo importante.</p></div></div>
+        <div class="card memory"><div>🧁</div><div><b>Dulces, muffins y chocolate de Dubái</b><p>Pruebas de que la Semilla Estelar también tiene poderes de repostería.</p></div></div>
+        <div class="card memory"><div>💅</div><div><b>Las uñas</b><p>Pequeñas fotos de cosas bonitas que haces y que siempre me gusta ver.</p></div></div>
+        <div class="card memory"><div>💍</div><div><b>Los collares</b><p>Nuestras grandes joyas, mirarla en mi cuello y acordarme de ti, mi pasatiempo favorito.</p></div></div>
+      </div>
+    </section>
+
+    <section id="cosas">
+      <div class="section-title">
+        <h2>❤️ Cosas que quizá no te digo suficiente</h2>
+      </div>
+      <div class="card feature">
+        <p class="quote">
+          Me lo paso muy bien contigo. Hablando, jugando, viendo series, viendo películas,
+          escuchando música y compartiendo tantos momentos que significan mucho para mí.
+        </p>
+        <p class="quote">
+          Eres lo más dulce del planeta, la más buena del universo. El nivel de tus poderes es incalculable. 
+          La más hermosa de todo el multiverso y sus infinitas líneas temporales.
+        </p>
+        <p class="quote">
+          La persona que es capaz de cambiar el estado de ánimo de todos los que la rodean, cuando está triste, todos nos preocupamos por ella. 
+          Incluso nos llega a doler más a nosotros, no verte con una sonrisa y feliz
+        </p>
+        <p class="quote">
+          Eres muy buena persona, eres dulce, eres especial y sí… también eres la más bonita
+          del mundo. Puedes protestar todo lo que quieras. Tu Chachi C tiene pruebas. ❤️
+        </p>
+      </div>
+    </section>
+
+    <section id="secreto">
+      <div class="card secret">
+        <div class="big">🌌</div>
+        <h2>Has llegado al final...</h2>
+        <p class="subtitle">
+          O eso crees.
+        </p>
+        <p>
+          Hay una cosa escondida en esta página. No te voy a decir dónde.
+        </p>
+        <p class="mini">Pista: a veces las estrellas que parecen decoración están ahí por algo.</p>
+        <div id="egg" class="egg hidden">✨ Sabía que acabarías encontrándolo, por algo eres la detective Pikachita. ❤️</div>
+      </div>
+    </section>
+
+    <footer>
+      Hecho especialmente para una <span class="heart">semilla estelar</span>.<br>
+      Con una cantidad científicamente innecesaria de cariño.
+      <div style="margin-top:14px">
+        <span class="tiny-star" title="¿Qué habrá pasado aquí?">✦</span>
+      </div>
+    </footer>
+  </div>
+</main>
+
+<div id="toast" class="toast"></div>
+
+<script>
+  /*
+    Clave de acceso a la web
+  */
+  const CLAVE_SECRETA = "Diosita";
+
+  function enterSite(){
+    const value = document.getElementById("password").value.trim();
+    if(value.toLowerCase() === CLAVE_SECRETA.toLowerCase()){
+      document.getElementById("loginScreen").classList.add("hidden");
+      document.getElementById("site").classList.remove("hidden");
+      window.scrollTo(0,0);
+    }else{
+      document.getElementById("error").textContent = "Pikachita, esa no es la clave secreta. 🥺";
+    }
+  }
+
+  document.getElementById("password").addEventListener("keydown", e => {
+    if(e.key === "Enter") enterSite();
+  });
+
+  let clicks = 0;
+  document.getElementById("secretStar").addEventListener("click", () => {
+    clicks++;
+    if(clicks < 7){
+      showToast(`La estrella ha brillado... (${clicks}/7) ✦`);
+    }else{
+      document.getElementById("egg").classList.remove("hidden");
+      showToast("✨ Has desbloqueado el easter egg.");
+      document.getElementById("egg").scrollIntoView({behavior:"smooth", block:"center"});
+    }
+  });
+
+  function showToast(message){
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 1800);
+  }
+</script>
+</body>
+</html>
